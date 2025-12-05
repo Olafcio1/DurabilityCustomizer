@@ -1,0 +1,5 @@
+# values: [on, off]
+# - `true` means that the minecraft feature is disabled.
+# - `false` enables it.
+item-durability: true
+anvil-damage: true

@@ -1,0 +1,8 @@
+name: DurabilityCustomizer
+version: '0.1'
+main: pl.olafcio.durabilitycustomizer.DurabilityCustomizer
+api-version: '1.21'
+load: STARTUP
+authors: [ Olafcio ]
+description: Cancels durability events as configured.
+website: https://olafcio1.github.io
