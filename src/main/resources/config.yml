@@ -1,4 +1,4 @@
-# values: [on, off]
+# values: [true, false]
 # - `true` means that the minecraft feature is disabled.
 # - `false` enables it.
 item-durability: true
