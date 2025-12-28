@@ -1,8 +1,15 @@
 name: DurabilityCustomizer
 version: '0.1'
 main: pl.olafcio.durabilitycustomizer.DurabilityCustomizer
-api-version: '1.21'
+api-version: '1.16'
 load: STARTUP
 authors: [ Olafcio ]
 description: Cancels durability events as configured.
 website: https://olafcio1.github.io
+commands:
+  durabilitycustomizer:
+    description: The main plugin command.
+permissions:
+  durabilitycustomizer.reload:
+    description: Reloads the plugin configuration.
+    default: op
