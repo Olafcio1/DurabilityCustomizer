@@ -16,6 +16,7 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         config = getConfig();
         getServer().getPluginManager().registerEvents(this, this);
     }
