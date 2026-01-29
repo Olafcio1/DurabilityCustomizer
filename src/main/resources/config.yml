@@ -6,13 +6,13 @@
 ### DURABILITY ###
 ##################
 
-# values: [true, false]
-# - `true` means that the minecraft feature is disabled.
-# - `false` enables it.
+# values: [disabled, enabled]
+# - `disabled` means that the minecraft feature is disabled.
+# - `enabled` enables it.
 
 durability:
-  item-durability: true
-  anvil-damage: true
+  item-durability: disabled
+  anvil-damage: disabled
 
 ##############
 ### UNSAFE ###

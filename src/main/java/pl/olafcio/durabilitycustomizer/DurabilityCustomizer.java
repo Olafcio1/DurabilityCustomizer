@@ -49,13 +49,13 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerItemDamage(PlayerItemDamageEvent event) {
-        if (config.getBoolean("durability.item-durability"))
+        if (config.getString("durability.item-durability").equalsIgnoreCase("disabled"))
             event.setCancelled(true);
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onAnvilDamaged(AnvilDamagedEvent event) {
-        if (config.getBoolean("durability.anvil-damage"))
+        if (config.getString("durability.anvil-damage").equalsIgnoreCase("disabled"))
             event.setCancelled(true);
     }
 
