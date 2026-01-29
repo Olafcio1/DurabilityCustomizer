@@ -1,5 +1,47 @@
+############################
+### DurabilityCustomizer ###
+############################
+
+##################
+### DURABILITY ###
+##################
+
 # values: [true, false]
 # - `true` means that the minecraft feature is disabled.
 # - `false` enables it.
-item-durability: true
-anvil-damage: true
+
+durability:
+  item-durability: true
+  anvil-damage: true
+
+##############
+### UNSAFE ###
+##############
+
+unsafe:
+  # This is a special tag useful for when you've set up your server to use the unbreakable tag,
+  # but messed it up at some part.
+  #
+  # For example:
+  # > **Problem:**
+  #   The shopkeepers have all cost items with unbreakability,
+  #   but output breakable items.
+  #
+  #   **Solution:**
+  #   Set `enabled` to true,
+  #       `value`   to true.
+  #
+  # > **Problem:**
+  #   The shopkeepers have all items without unbreakability,
+  #   so you've installed another plugin to make all items unbreakable.
+  #
+  #   The plugin that was supposed to fix the issue made it even worse,
+  #   as it added the Unbreakable:1b tag, which wasn't described anywhere.
+  #
+  #   **Solution:**
+  #   Set `enabled` to true,
+  #       `value`   to false.
+  #
+  force-unbreakable-tag:
+    enabled: false
+    value: true
