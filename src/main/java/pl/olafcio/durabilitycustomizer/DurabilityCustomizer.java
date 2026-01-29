@@ -15,14 +15,42 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public final class DurabilityCustomizer extends JavaPlugin implements Listener {
     FileConfiguration config;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        config = getConfig();
+        reloadConfig();
         getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    public void reloadConfig() {
+        super.reloadConfig();
+        config = getConfig();
+
+        if (Stream.of(
+                config.getString("durability.item-durability"),
+                config.getString("durability.anvil-damage")
+        ).anyMatch(el -> el == null || !(
+                el.equalsIgnoreCase("disabled") ||
+                el.equalsIgnoreCase("enabled")
+        )))
+            throw new RuntimeException("Durability configuration section is corrupted; please delete your configuration" +
+                                       " and rewrite it after regeneration.");
+
+        if (Stream.of(
+                config.getString("unsafe.force-unbreakable-tag.enabled"),
+                config.getString("unsafe.force-unbreakable-tag.value")
+        ).anyMatch(el -> el == null || !(
+                el.equals("true") ||
+                el.equals("false")
+        )))
+            throw new RuntimeException("Unsafe configuration section is corrupted; please delete your configuration" +
+                                       " and rewrite it after regeneration.");
     }
 
     @Override
@@ -31,8 +59,6 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
             if (args.length >= 1 && args[0].equals("reload")) {
                 if (sender.hasPermission("durabilitycustomizer.reload")) {
                     reloadConfig();
-                    config = getConfig();
-
                     sender.sendMessage(Component.text("§3[DurabilityCustomizer]§7 Reloaded the configuration."));
                 } else {
                     sender.sendMessage(Component.text("§3[DurabilityCustomizer]§c Error:§4 No permission."));
