@@ -31,7 +31,7 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
                     sender.sendMessage(Component.text("§3[DurabilityCustomizer]§7 Reloaded the configuration."));
                 } else {
-                    sender.sendMessage(Component.text("§3[DurabilityCustomizer]§cError:§4 No permission."));
+                    sender.sendMessage(Component.text("§3[DurabilityCustomizer]§c Error:§4 No permission."));
                 }
             } else {
                 sender.sendMessage(Component.text("§3[DurabilityCustomizer]§7 Made by §aOlafcio§7 with §blove"));
