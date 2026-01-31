@@ -20,6 +20,9 @@ import java.util.stream.Stream;
 public final class DurabilityCustomizer extends JavaPlugin implements Listener {
     FileConfiguration config;
 
+    boolean itemDurability;
+    boolean anvilDamage;
+
     boolean futEnabled;
     boolean futValue;
 
@@ -54,6 +57,9 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
             throw new RuntimeException("Unsafe configuration section is corrupted; please delete your configuration" +
                                        " and rewrite it after regeneration.");
 
+        itemDurability = config.getString("durability.item-durability").equals("enabled");
+        anvilDamage = config.getString("durability.anvil-damage").equals("enabled");
+
         futEnabled = config.getBoolean("unsafe.force-unbreakable-tag.enabled");
         futValue = config.getBoolean("unsafe.force-unbreakable-tag.value");
     }
@@ -80,13 +86,13 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerItemDamage(PlayerItemDamageEvent event) {
-        if (config.getString("durability.item-durability").equalsIgnoreCase("disabled"))
+        if (!itemDurability)
             event.setCancelled(true);
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onAnvilDamaged(AnvilDamagedEvent event) {
-        if (config.getString("durability.anvil-damage").equalsIgnoreCase("disabled"))
+        if (!anvilDamage)
             event.setCancelled(true);
     }
 
