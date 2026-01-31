@@ -15,11 +15,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public final class DurabilityCustomizer extends JavaPlugin implements Listener {
     FileConfiguration config;
+
+    boolean futEnabled;
+    boolean futValue;
 
     @Override
     public void onEnable() {
@@ -51,6 +53,9 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
         )))
             throw new RuntimeException("Unsafe configuration section is corrupted; please delete your configuration" +
                                        " and rewrite it after regeneration.");
+
+        futEnabled = config.getBoolean("unsafe.force-unbreakable-tag.enabled");
+        futValue = config.getBoolean("unsafe.force-unbreakable-tag.value");
     }
 
     @Override
@@ -87,11 +92,11 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (config.getBoolean("unsafe.force-unbreakable-tag.enabled")) {
+        if (futEnabled) {
             var player = event.getPlayer();
             var items = player.getInventory();
 
-            var want = config.getBoolean("unsafe.force-unbreakable-tag.value");
+            var want = futValue;
             for (var i = 0; i < items.getSize(); i++) {
                 var item = items.getItem(i);
                 if (item != null) {
@@ -111,11 +116,11 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onPlayerPurchase(PlayerPurchaseEvent event) {
-        if (config.getBoolean("unsafe.force-unbreakable-tag.enabled")) {
+        if (futEnabled) {
             var trade = event.getTrade();
             var item = trade.getResult();
 
-            var want = config.getBoolean("unsafe.force-unbreakable-tag.value");
+            var want = futValue;
             var meta = item.getItemMeta();
 
             if (meta.isUnbreakable() != want) {
@@ -129,13 +134,13 @@ public final class DurabilityCustomizer extends JavaPlugin implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onItemPickup(PlayerAttemptPickupItemEvent event) {
-        if (config.getBoolean("unsafe.force-unbreakable-tag.enabled")) {
+        if (futEnabled) {
             var item = event.getItem();
 
             var stack = item.getItemStack();
             var meta = stack.getItemMeta();
 
-            var want = config.getBoolean("unsafe.force-unbreakable-tag.value");
+            final var want = futValue;
             if (meta.isUnbreakable() != want) {
                 meta.setUnbreakable(want);
 
