@@ -2,9 +2,11 @@
 ### DurabilityCustomizer ###
 ############################
 
-##################
-### DURABILITY ###
-##################
+##################################
+###         DURABILITY         ###
+### -------------------------- ###
+### Toggles global durability. ###
+##################################
 
 # values: [disabled, enabled]
 # - `disabled` means that the minecraft feature is disabled.
@@ -14,9 +16,11 @@ durability:
   item-durability: disabled
   anvil-damage: disabled
 
-##############
-### UNSAFE ###
-##############
+#########################################################
+###                      UNSAFE                       ###
+### ------------------------------------------------- ###
+### Settings that may potentially damage your server. ###
+#########################################################
 
 unsafe:
   # This is a special tag useful for when you've set up your server to use the unbreakable tag,
