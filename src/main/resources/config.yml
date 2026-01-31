@@ -16,6 +16,19 @@ durability:
   item-durability: disabled
   anvil-damage: disabled
 
+##########################################
+###              OVERRIDES             ###
+### ---------------------------------- ###
+### Tool-personal durability settings. ###
+##########################################
+
+# the override key is an item ID.
+# the value is the value each damage taken is multiplied by.
+#       (if it's 0, there's inf durability)
+
+overrides:
+  diamond_pickaxe: 0
+
 #########################################################
 ###                      UNSAFE                       ###
 ### ------------------------------------------------- ###
